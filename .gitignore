@@ -1,0 +1,50 @@
+```
+# Dependencies
+node_modules/
+vendor/
+
+# Build outputs
+dist/
+build/
+target/
+
+# Tauri specific
+src-tauri/target/
+**/*.app
+**/*.exe
+**/*.msi
+**/*.deb
+**/*.rpm
+**/*.AppImage
+
+# Development
+.env
+.env.local
+.env.*
+.env.test
+.env.development
+.env.production
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Python (if any Python files exist in project)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.venv/
+.env
+```
