@@ -1,0 +1,9 @@
+[Desktop Entry]
+Categories=
+Comment=Minimalistic password generator
+Exec=urz
+StartupWMClass=urz
+Icon=urz
+Name=Urz
+Terminal=false
+Type=Application

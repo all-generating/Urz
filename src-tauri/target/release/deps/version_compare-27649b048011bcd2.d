@@ -1,0 +1,12 @@
+/workspace/src-tauri/target/release/deps/version_compare-27649b048011bcd2.d: /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/version-compare-0.2.1/src/lib.rs /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/version-compare-0.2.1/src/cmp.rs /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/version-compare-0.2.1/src/compare.rs /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/version-compare-0.2.1/src/manifest.rs /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/version-compare-0.2.1/src/part.rs /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/version-compare-0.2.1/src/version.rs
+
+/workspace/src-tauri/target/release/deps/libversion_compare-27649b048011bcd2.rlib: /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/version-compare-0.2.1/src/lib.rs /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/version-compare-0.2.1/src/cmp.rs /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/version-compare-0.2.1/src/compare.rs /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/version-compare-0.2.1/src/manifest.rs /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/version-compare-0.2.1/src/part.rs /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/version-compare-0.2.1/src/version.rs
+
+/workspace/src-tauri/target/release/deps/libversion_compare-27649b048011bcd2.rmeta: /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/version-compare-0.2.1/src/lib.rs /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/version-compare-0.2.1/src/cmp.rs /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/version-compare-0.2.1/src/compare.rs /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/version-compare-0.2.1/src/manifest.rs /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/version-compare-0.2.1/src/part.rs /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/version-compare-0.2.1/src/version.rs
+
+/root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/version-compare-0.2.1/src/lib.rs:
+/root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/version-compare-0.2.1/src/cmp.rs:
+/root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/version-compare-0.2.1/src/compare.rs:
+/root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/version-compare-0.2.1/src/manifest.rs:
+/root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/version-compare-0.2.1/src/part.rs:
+/root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/version-compare-0.2.1/src/version.rs:
