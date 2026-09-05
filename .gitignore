@@ -1,57 +1,33 @@
 ```
-# Dependencies
-node_modules/
-target/
-
-# Build outputs
+# Build artifacts
 frontend/dist/
 src-tauri/target/
 
-# Generated schemas
-src-tauri/gen/schemas/
-
-# Environment
-.env
-.env.local
-*.env.*
+# Dependencies
+node_modules/
 
 # Logs
 *.log
+
+# Environment variables
+.env
+.env.local
+.env.*
+
+# IDE
+.vscode/
+.idea/
 
 # OS generated files
 .DS_Store
 Thumbs.db
 
-# Editor/IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*.tmp
+# Rust specific
+Cargo.lock
+target/
+**/*.rs.bk
 
-# Python related (if any Python files exist in project)
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
-*.so
-
-# Coverage reports
-coverage/
-htmlcov/
-.coverage
-
-# Testing
-.mypy_cache/
-.pytest_cache/
-
-# Archives
-*.zip
-*.tar.gz
-*.tar.bz2
-*.tar.xz
-*.gz
-*.rar
-*.7z
+# Tauri
+src-tauri/tauri.conf.json
+src-tauri/tauri.conf.dev.json
 ```

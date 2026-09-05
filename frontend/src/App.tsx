@@ -1,8 +1,18 @@
 import { useState, useEffect } from 'react';
+import en from './locales/en.json';
+import es from './locales/es.json';
+import ru from './locales/ru.json';
 
 const { invoke } = window.__TAURI__.core;
 
+const translations: Record<string, typeof en> = { en, es, ru };
+
+type Lang = 'en' | 'es' | 'ru';
+
 function App() {
+  const [lang, setLang] = useState<Lang>('en');
+  const t = translations[lang];
+  
   const [password, setPassword] = useState('');
   const [salt, setSalt] = useState('');
   const [length, setLength] = useState(16);
@@ -10,6 +20,7 @@ function App() {
   const [result, setResult] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [showLangMenu, setShowLangMenu] = useState(false);
   
   // Generate password whenever inputs change
   useEffect(() => {
@@ -35,32 +46,46 @@ function App() {
 
   return (
     <div className="container">
-      <h1 className="title">Urz</h1>
+      <div className="header">
+        <h1 className="title">{t.title}</h1>
+        <div className="lang-selector">
+          <button onClick={() => setShowLangMenu(!showLangMenu)} className="lang-btn" title={t.selectLanguage}>
+            {lang.toUpperCase()} ▼
+          </button>
+          {showLangMenu && (
+            <div className="lang-menu">
+              <button onClick={() => { setLang('en'); setShowLangMenu(false); }}>English</button>
+              <button onClick={() => { setLang('es'); setShowLangMenu(false); }}>Español</button>
+              <button onClick={() => { setLang('ru'); setShowLangMenu(false); }}>Русский</button>
+            </div>
+          )}
+        </div>
+      </div>
       
       <div className="input-group">
-        <label>Your password</label>
+        <label>{t.yourPassword}</label>
         <input
           type="text"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="Enter your password"
+          placeholder={t.passwordPlaceholder}
           className="input-field"
         />
       </div>
 
       <div className="input-group">
-        <label>Salt</label>
+        <label>{t.salt}</label>
         <input
           type="text"
           value={salt}
           onChange={(e) => setSalt(e.target.value)}
-          placeholder="Enter salt"
+          placeholder={t.saltPlaceholder}
           className="input-field"
         />
       </div>
 
       <div className="input-group">
-        <label>Length: {length}</label>
+        <label>{t.length}: {length}</label>
         <input
           type="range"
           min="6"
@@ -72,7 +97,7 @@ function App() {
       </div>
 
       <div className="input-group toggle-group">
-        <label>Symbols</label>
+        <label>{t.symbols}</label>
         <button
           onClick={() => setUseSymbols(!useSymbols)}
           className={`toggle ${useSymbols ? 'active' : ''}`}
@@ -88,12 +113,12 @@ function App() {
             value={result}
             readOnly
             className="result-field"
-            placeholder="Generated password"
+            placeholder={t.result}
           />
           <button
             onClick={() => setShowPassword(!showPassword)}
             className="toggle-btn"
-            title={showPassword ? 'Hide' : 'Show'}
+            title={showPassword ? t.hidePassword : t.showPassword}
           >
             {showPassword ? (
               <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2">
@@ -114,7 +139,7 @@ function App() {
         onClick={handleCopy}
         className={`copy-btn ${copied ? 'copied' : ''}`}
       >
-        {copied ? '✓ Copied!' : 'Copy to clipboard'}
+        {copied ? `✓ ${t.copied}` : t.copyToClipboard}
       </button>
     </div>
   );

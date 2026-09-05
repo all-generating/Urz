@@ -1,0 +1,15 @@
+{
+  "title": "Urz",
+  "yourPassword": "Ваш Пароль",
+  "passwordPlaceholder": "Введите мастер-пароль",
+  "salt": "Соль (Salt)",
+  "saltPlaceholder": "Введите значение соли",
+  "length": "Длина",
+  "symbols": "Спецсимволы",
+  "result": "Здесь появится сгенерированный пароль",
+  "copyToClipboard": "Копировать",
+  "copied": "Скопировано!",
+  "showPassword": "Показать пароль",
+  "hidePassword": "Скрыть пароль",
+  "selectLanguage": "Язык"
+}
