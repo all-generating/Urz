@@ -38,7 +38,10 @@ function App() {
     const generate = async () => {
       try {
         const res = await invoke('generate_password_cmd', {
-          req: { password, salt, length, useSymbols },
+          password,
+          salt,
+          length,
+          use_symbols: useSymbols,
         });
         setResult((res as any)?.password || '');
       } catch (e) {

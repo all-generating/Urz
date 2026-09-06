@@ -34,12 +34,10 @@ describe('Password Generator App', () => {
     // Wait for invoke to be called
     await waitFor(() => {
       expect(mockInvoke).toHaveBeenCalledWith('generate_password_cmd', {
-        req: {
-          password: 'mypassword',
-          salt: 'mysalt',
-          length: 16,
-          useSymbols: false,
-        },
+        password: 'mypassword',
+        salt: 'mysalt',
+        length: 16,
+        use_symbols: false,
       });
     });
     
@@ -73,12 +71,10 @@ describe('Password Generator App', () => {
     
     await waitFor(() => {
       expect(mockInvoke).toHaveBeenCalledWith('generate_password_cmd', {
-        req: {
-          password: 'test',
-          salt: 'salt',
-          length: 32,
-          useSymbols: false,
-        },
+        password: 'test',
+        salt: 'salt',
+        length: 32,
+        use_symbols: false,
       });
     });
   });
@@ -108,18 +104,16 @@ describe('Password Generator App', () => {
     
     await waitFor(() => {
       expect(mockInvoke).toHaveBeenCalledWith('generate_password_cmd', {
-        req: {
-          password: 'test',
-          salt: 'salt',
-          length: 16,
-          useSymbols: true,
-        },
+        password: 'test',
+        salt: 'salt',
+        length: 16,
+        use_symbols: true,
       });
     });
   });
 
   it('should copy result to clipboard when copy button is clicked', async () => {
-    mockInvoke.mockImplementation(async (cmd: string, args?: any) => {
+    mockInvoke.mockImplementation(async (cmd: string, _args?: any) => {
       if (cmd === 'generate_password_cmd') {
         return { password: 'CopyMe123' };
       }
@@ -164,12 +158,10 @@ describe('Password Generator App', () => {
     
     await waitFor(() => {
       expect(mockInvoke).toHaveBeenCalledWith('generate_password_cmd', {
-        req: {
-          password: '',
-          salt: 'mysalt',
-          length: 16,
-          useSymbols: false,
-        },
+        password: '',
+        salt: 'mysalt',
+        length: 16,
+        use_symbols: false,
       });
     });
     
@@ -211,12 +203,10 @@ describe('Password Generator App', () => {
     
     // Verify final call has all updated values
     expect(mockInvoke).toHaveBeenLastCalledWith('generate_password_cmd', {
-      req: {
-        password: 'pass1',
-        salt: 'salt1',
-        length: 24,
-        useSymbols: true,
-      },
+      password: 'pass1',
+      salt: 'salt1',
+      length: 24,
+      use_symbols: true,
     });
   });
 

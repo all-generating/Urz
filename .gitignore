@@ -1,40 +1,33 @@
 ```
-# Dependencies
-node_modules/
-
-# Build outputs
-dist/
-build/
+# Build artifacts
+frontend/dist/
 target/
 
-# Package manager
-package-lock.json
-yarn.lock
+# Dependencies
+node_modules/
+vendor/
 
-# Environment variables
+# Logs and temp files
+*.log
+*.tmp
+
+# Environment
 .env
 .env.local
-.env.*
+*.env.*
 
-# IDE files
+# Editors
 .vscode/
 .idea/
-*.swp
-*.swo
 
-# Logs
-*.log
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
 
-# Coverage
-coverage/
-htmlcov/
-.coverage
-
-# Temp files
-*.tmp
-Thumbs.db
-.DS_Store
-
-# Testing
-.vitest/
+# Rust/Cargo (from Tauri project)
+Cargo.lock
+**/*.rs.bk
+target/
 ```
