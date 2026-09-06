@@ -2,6 +2,7 @@ use serde::{Deserialize, Serialize};
 
 /// Request data for password generation
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct GenerateRequest {
     pub password: String,
     pub salt: String,

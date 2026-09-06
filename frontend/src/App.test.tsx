@@ -34,12 +34,10 @@ describe('Password Generator App', () => {
     // Wait for invoke to be called
     await waitFor(() => {
       expect(mockInvoke).toHaveBeenCalledWith('generate_password_cmd', {
-        req: {
-          password: 'mypassword',
-          salt: 'mysalt',
-          length: 16,
-          useSymbols: false,
-        },
+        password: 'mypassword',
+        salt: 'mysalt',
+        length: 16,
+        useSymbols: false,
       });
     });
     
@@ -73,12 +71,10 @@ describe('Password Generator App', () => {
     
     await waitFor(() => {
       expect(mockInvoke).toHaveBeenCalledWith('generate_password_cmd', {
-        req: {
-          password: 'test',
-          salt: 'salt',
-          length: 32,
-          useSymbols: false,
-        },
+        password: 'test',
+        salt: 'salt',
+        length: 32,
+        useSymbols: false,
       });
     });
   });
@@ -108,18 +104,16 @@ describe('Password Generator App', () => {
     
     await waitFor(() => {
       expect(mockInvoke).toHaveBeenCalledWith('generate_password_cmd', {
-        req: {
-          password: 'test',
-          salt: 'salt',
-          length: 16,
-          useSymbols: true,
-        },
+        password: 'test',
+        salt: 'salt',
+        length: 16,
+        useSymbols: true,
       });
     });
   });
 
   it('should copy result to clipboard when copy button is clicked', async () => {
-    mockInvoke.mockImplementation(async (cmd: string, args?: any) => {
+    mockInvoke.mockImplementation(async (cmd: string, _args?: any) => {
       if (cmd === 'generate_password_cmd') {
         return { password: 'CopyMe123' };
       }
@@ -164,17 +158,35 @@ describe('Password Generator App', () => {
     
     await waitFor(() => {
       expect(mockInvoke).toHaveBeenCalledWith('generate_password_cmd', {
-        req: {
-          password: '',
-          salt: 'mysalt',
-          length: 16,
-          useSymbols: false,
-        },
+        password: '',
+        salt: 'mysalt',
+        length: 16,
+        useSymbols: false,
       });
     });
     
     const resultField = screen.getByPlaceholderText('Generated password will appear here') as HTMLInputElement;
     expect(resultField.value).toBe('');
+  });
+
+  it('should have empty result when both password and salt are empty', async () => {
+    render(<App />);
+    
+    // Don't enter anything - both fields should be empty
+    const passwordInput = screen.getByPlaceholderText('Enter your master password') as HTMLInputElement;
+    const saltInput = screen.getByPlaceholderText('Enter salt value') as HTMLInputElement;
+    
+    expect(passwordInput.value).toBe('');
+    expect(saltInput.value).toBe('');
+    
+    // Wait a bit to ensure useEffect has run
+    await waitFor(() => {
+      const resultField = screen.getByPlaceholderText('Generated password will appear here') as HTMLInputElement;
+      expect(resultField.value).toBe('');
+    });
+    
+    // Invoke should not be called when both fields are empty
+    expect(mockInvoke).not.toHaveBeenCalledWith('generate_password_cmd', expect.anything());
   });
 
   it('should handle multiple input changes in sequence', async () => {
@@ -211,12 +223,10 @@ describe('Password Generator App', () => {
     
     // Verify final call has all updated values
     expect(mockInvoke).toHaveBeenLastCalledWith('generate_password_cmd', {
-      req: {
-        password: 'pass1',
-        salt: 'salt1',
-        length: 24,
-        useSymbols: true,
-      },
+      password: 'pass1',
+      salt: 'salt1',
+      length: 24,
+      useSymbols: true,
     });
   });
 
