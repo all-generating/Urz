@@ -53,6 +53,10 @@ source $HOME/.cargo/env
 #### Build
 
 ```bash
+# Install Tauri CLI (if not already installed)
+cargo install tauri-cli
+
+# Build the application
 cd frontend && npm install && cd ..
 cargo tauri build
 ```
@@ -77,6 +81,10 @@ The built application will be in `src-tauri/target/release/bundle/`.
 Open PowerShell or Command Prompt as Administrator:
 
 ```powershell
+# Install Tauri CLI (if not already installed)
+cargo install tauri-cli
+
+# Build the application
 cd frontend
 npm install
 cd ..
@@ -106,6 +114,10 @@ brew install node
 #### Build
 
 ```bash
+# Install Tauri CLI (if not already installed)
+cargo install tauri-cli
+
+# Build the application
 cd frontend && npm install && cd ..
 cargo tauri build
 ```
@@ -129,6 +141,10 @@ export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 #### Build APK
 
 ```bash
+# Install Tauri CLI (if not already installed)
+cargo install tauri-cli
+
+# Build APK
 cd frontend && npm install && cd ..
 cargo tauri android build --apk
 ```
@@ -147,6 +163,10 @@ APK will be in `src-tauri/target/android/app/build/outputs/apk/`.
 #### Build
 
 ```bash
+# Install Tauri CLI (if not already installed)
+cargo install tauri-cli
+
+# Build iOS app
 cd frontend && npm install && cd ..
 cargo tauri ios build
 ```

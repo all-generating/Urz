@@ -1,9 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import en from './locales/en.json';
 import es from './locales/es.json';
 import ru from './locales/ru.json';
-
-const { invoke } = window.__TAURI__.core;
 
 const translations: Record<string, typeof en> = { en, es, ru };
 
@@ -12,6 +10,19 @@ type Lang = 'en' | 'es' | 'ru';
 function App() {
   const [lang, setLang] = useState<Lang>('en');
   const t = translations[lang];
+  
+  // Get invoke function - safely access Tauri API
+  const invoke = useCallback(async (cmd: string, args?: Record<string, unknown>) => {
+    if (window.__TAURI__?.core?.invoke) {
+      return window.__TAURI__.core.invoke(cmd, args);
+    }
+    // Fallback for testing/browser environment
+    console.warn(`Tauri invoke not available, mocking command: ${cmd}`);
+    if (cmd === 'generate_password_cmd') {
+      return { password: '' };
+    }
+    return undefined;
+  }, []);
   
   const [password, setPassword] = useState('');
   const [salt, setSalt] = useState('');
@@ -29,14 +40,14 @@ function App() {
         const res = await invoke('generate_password_cmd', {
           req: { password, salt, length, useSymbols },
         });
-        setResult((res as any).password);
+        setResult((res as any)?.password || '');
       } catch (e) {
         console.error(e);
         setResult('');
       }
     };
     generate();
-  }, [password, salt, length, useSymbols]);
+  }, [password, salt, length, useSymbols, invoke]);
   
   const handleCopy = async () => {
     await invoke('copy_to_clipboard', { text: result });
@@ -97,10 +108,12 @@ function App() {
       </div>
 
       <div className="input-group toggle-group">
-        <label>{t.symbols}</label>
+        <label htmlFor="symbols-toggle">{t.symbols}</label>
         <button
+          id="symbols-toggle"
           onClick={() => setUseSymbols(!useSymbols)}
           className={`toggle ${useSymbols ? 'active' : ''}`}
+          aria-label={t.symbols}
         >
           <span className="toggle-indicator" />
         </button>

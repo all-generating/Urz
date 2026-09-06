@@ -1,33 +1,40 @@
 ```
-# Build artifacts
-frontend/dist/
-src-tauri/target/
-
 # Dependencies
 node_modules/
 
-# Logs
-*.log
+# Build outputs
+dist/
+build/
+target/
+
+# Package manager
+package-lock.json
+yarn.lock
 
 # Environment variables
 .env
 .env.local
 .env.*
 
-# IDE
+# IDE files
 .vscode/
 .idea/
+*.swp
+*.swo
 
-# OS generated files
-.DS_Store
+# Logs
+*.log
+
+# Coverage
+coverage/
+htmlcov/
+.coverage
+
+# Temp files
+*.tmp
 Thumbs.db
+.DS_Store
 
-# Rust specific
-Cargo.lock
-target/
-**/*.rs.bk
-
-# Tauri
-src-tauri/tauri.conf.json
-src-tauri/tauri.conf.dev.json
+# Testing
+.vitest/
 ```
