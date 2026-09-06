@@ -1,0 +1,15 @@
+{
+  "title": "Urz",
+  "yourPassword": "Tu Contraseña",
+  "passwordPlaceholder": "Introduce tu contraseña maestra",
+  "salt": "Sal",
+  "saltPlaceholder": "Introduce el valor de sal",
+  "length": "Longitud",
+  "symbols": "Símbolos Especiales",
+  "result": "La contraseña generada aparecerá aquí",
+  "copyToClipboard": "Copiar al Portapapeles",
+  "copied": "¡Copiado!",
+  "showPassword": "Mostrar contraseña",
+  "hidePassword": "Ocultar contraseña",
+  "selectLanguage": "Idioma"
+}
