@@ -1,7 +1,7 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "Urz",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "identifier": "com.urz.desktop",
   "build": {
     "frontendDist": "../frontend/dist",
@@ -14,7 +14,7 @@
     "windows": [
       {
         "title": "Urz",
-        "width": 400,
+        "width": 420,
         "height": 650,
         "resizable": true,
         "fullscreen": false,
