@@ -1,74 +1,33 @@
 ```
+# Dependencies
+node_modules/
+
 # Build artifacts
 dist/
 build/
 target/
-
-# Dependencies
-node_modules/
-vendor/
 
 # Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
+*.py.class
 .Python
 env/
 venv/
 .venv/
 .ENV
 .python-version
-pip-log.txt
-pip-delete-this-directory.txt
-.tox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
+
+# Logs
 *.log
-*.pot
-*.pyc
-*.pyo
-*.pyd
-.MF
-tags
-TAGS
-.idlerc/
-.python-version
-.pytest_cache/
-.mypy_cache/
-.hypothesis/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Rust/Cargo (from Tauri)
-Cargo.lock
-target/
-**/*.rs.bk
-*.lock
-
-# Environment variables
-.env
-.env.local
-.env.*
-!.env.example
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# OS
+# OS generated files
 .DS_Store
-Thumbs.db
-ehthumbs.db
-Icon?
-.directory
-*.nib
-*~
 .DS_Store?
 ._*
 .Spotlight-V100
@@ -77,30 +36,37 @@ ehthumbs.db
 Thumbs.db
 desktop.ini
 
-# Logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment variables
+.env
+.env.local
+.env.*
+!.env.example
 
 # Coverage
 coverage/
-*.lcov
-*.profdata
-*.gcda
-*.gcno
-*.info
+htmlcov/
+.coverage
+*.cover
+coverage.xml
+.nyc_output
 
 # Temporary files
 *.tmp
 *.temp
-*.bak
-*.backup
+tmp/
+.temp/
 
-# Archives
+# Compressed files
 *.zip
-*.tar
 *.gz
+*.tar
 *.tgz
 *.bz2
 *.xz
@@ -120,4 +86,24 @@ coverage/
 *.tar.bz2
 *.tar.xz
 *.tar.zst
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# PyTest
+.pytest_cache/
+
+# Gradle
+.gradle/
+
+# Compiled Binary files
+*.exe
+*.dll
+*.so
+*.a
+*.o
+*.out
+*.class
 ```

@@ -169,6 +169,26 @@ describe('Password Generator App', () => {
     expect(resultField.value).toBe('');
   });
 
+  it('should have empty result when both password and salt are empty', async () => {
+    render(<App />);
+    
+    // Don't enter anything - both fields should be empty
+    const passwordInput = screen.getByPlaceholderText('Enter your master password') as HTMLInputElement;
+    const saltInput = screen.getByPlaceholderText('Enter salt value') as HTMLInputElement;
+    
+    expect(passwordInput.value).toBe('');
+    expect(saltInput.value).toBe('');
+    
+    // Wait a bit to ensure useEffect has run
+    await waitFor(() => {
+      const resultField = screen.getByPlaceholderText('Generated password will appear here') as HTMLInputElement;
+      expect(resultField.value).toBe('');
+    });
+    
+    // Invoke should not be called when both fields are empty
+    expect(mockInvoke).not.toHaveBeenCalledWith('generate_password_cmd', expect.anything());
+  });
+
   it('should handle multiple input changes in sequence', async () => {
     mockInvoke.mockResolvedValue({ password: 'FinalResult' });
     

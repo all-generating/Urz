@@ -44,6 +44,12 @@ function App() {
   // Generate password whenever inputs change
   useEffect(() => {
     const generate = async () => {
+      // Only generate if at least one of password or salt has a value
+      if (!password && !salt) {
+        setResult('');
+        return;
+      }
+      
       try {
         const res = await invoke('generate_password_cmd', {
           password,
