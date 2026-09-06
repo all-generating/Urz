@@ -1,6 +1,8 @@
 use crate::password::generate_password;
 use std::sync::{Arc, Mutex};
 use tauri::{AppHandle, Manager, Runtime};
+use futures_timer::Delay;
+use std::time::Duration;
 
 /// State to manage clipboard clearing
 #[derive(Clone)]
@@ -30,15 +32,14 @@ pub fn generate_password_cmd(
         return Err("Invalid length. Must be between 6 and 64.".to_string());
     }
 
-    Ok(crate::models::GenerateResponse { password: generated })
+    Ok(crate::models::GenerateResponse {
+        password: generated,
+    })
 }
 
 /// Copy text to clipboard and schedule clearing after 60 seconds
 #[tauri::command]
-pub fn copy_to_clipboard<R: Runtime>(
-    app: AppHandle<R>,
-    text: String,
-) -> Result<(), String> {
+pub fn copy_to_clipboard<R: Runtime>(app: AppHandle<R>, text: String) -> Result<(), String> {
     use tauri_plugin_clipboard_manager::ClipboardExt;
 
     // Store the text we're copying
@@ -56,26 +57,57 @@ pub fn copy_to_clipboard<R: Runtime>(
     // Schedule clipboard clearing after 60 seconds
     let app_clone = app.clone();
     tauri::async_runtime::spawn(async move {
-        tokio::time::sleep(tokio::time::Duration::from_secs(60)).await;
+        // Wait for 60 seconds using futures_timer which is compatible with async-std
+        Delay::new(Duration::from_secs(60)).await;
 
         let state = app_clone.state::<ClipboardState>();
-        let last_text_guard = state.last_copied_text.lock().ok();
 
-        // Check if the clipboard still contains our text
-        if let Some(last_text) = last_text_guard.as_ref().and_then(|g| g.clone()) {
-            let current_clipboard = app_clone.clipboard().read_text().ok();
+        // Get the text we stored, releasing the lock immediately
+        let stored_text = {
+            let last_text_guard = state.last_copied_text.lock().ok();
+            last_text_guard.and_then(|g| g.clone())
+        };
 
-            // Only clear if the clipboard still has our text (user didn't copy something else)
-            if current_clipboard == Some(last_text) {
-                let _ = app_clone.clipboard().clear();
-                let mut last_text_mut = state.last_copied_text.lock().ok();
-                if let Some(lt) = last_text_mut.as_mut() {
-                    *lt = None;
-                }
-                println!("[Clipboard] Cleared after 60 seconds");
-            } else {
-                println!("[Clipboard] Not cleared - user copied different content");
+        // If no stored text, nothing to clear
+        let last_text = match stored_text {
+            Some(text) => text,
+            None => {
+                println!("[Clipboard] No stored text to check");
+                return;
             }
+        };
+
+        // Safely check clipboard contents
+        // We need to handle cases where clipboard contains non-text data (images, files)
+        let should_clear = {
+            let clipboard = app_clone.clipboard();
+            // Try to read as text - if it fails or doesn't match, don't clear
+            match clipboard.read_text() {
+                Ok(current_text) => current_text == last_text,
+                Err(_) => {
+                    // Clipboard contains non-text data (image, file, etc.) or is empty
+                    // Don't clear in this case
+                    false
+                }
+            }
+        };
+
+        if should_clear {
+            // Clear our stored text first
+            {
+                let mut last_text_guard = state.last_copied_text.lock().unwrap_or_else(|e| e.into_inner());
+                *last_text_guard = None;
+            }
+
+            // Then clear the clipboard
+            let clipboard = app_clone.clipboard();
+            if let Err(e) = clipboard.clear() {
+                eprintln!("[Clipboard] Failed to clear: {}", e);
+            } else {
+                println!("[Clipboard] Cleared after 60 seconds");
+            }
+        } else {
+            println!("[Clipboard] Not cleared - user copied different content or non-text data");
         }
     });
 
