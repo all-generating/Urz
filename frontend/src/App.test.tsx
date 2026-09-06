@@ -37,7 +37,7 @@ describe('Password Generator App', () => {
         password: 'mypassword',
         salt: 'mysalt',
         length: 16,
-        use_symbols: false,
+        useSymbols: false,
       });
     });
     
@@ -74,7 +74,7 @@ describe('Password Generator App', () => {
         password: 'test',
         salt: 'salt',
         length: 32,
-        use_symbols: false,
+        useSymbols: false,
       });
     });
   });
@@ -107,7 +107,7 @@ describe('Password Generator App', () => {
         password: 'test',
         salt: 'salt',
         length: 16,
-        use_symbols: true,
+        useSymbols: true,
       });
     });
   });
@@ -161,7 +161,7 @@ describe('Password Generator App', () => {
         password: '',
         salt: 'mysalt',
         length: 16,
-        use_symbols: false,
+        useSymbols: false,
       });
     });
     
@@ -206,7 +206,7 @@ describe('Password Generator App', () => {
       password: 'pass1',
       salt: 'salt1',
       length: 24,
-      use_symbols: true,
+      useSymbols: true,
     });
   });
 

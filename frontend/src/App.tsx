@@ -14,12 +14,20 @@ function App() {
   // Get invoke function - safely access Tauri API
   const invoke = useCallback(async (cmd: string, args?: Record<string, unknown>) => {
     if (window.__TAURI__?.core?.invoke) {
-      return window.__TAURI__.core.invoke(cmd, args);
+      console.log(`[Tauri Invoke] Calling command: ${cmd}`, args);
+      try {
+        const result = await window.__TAURI__.core.invoke(cmd, args);
+        console.log(`[Tauri Invoke] Result for ${cmd}:`, result);
+        return result;
+      } catch (error) {
+        console.error(`[Tauri Invoke] Error for ${cmd}:`, error);
+        throw error;
+      }
     }
     // Fallback for testing/browser environment
     console.warn(`Tauri invoke not available, mocking command: ${cmd}`);
     if (cmd === 'generate_password_cmd') {
-      return { password: '' };
+      return { password: 'MOCKED_PASSWORD' };
     }
     return undefined;
   }, []);
@@ -41,7 +49,7 @@ function App() {
           password,
           salt,
           length,
-          use_symbols: useSymbols,
+          useSymbols,
         });
         setResult((res as any)?.password || '');
       } catch (e) {
