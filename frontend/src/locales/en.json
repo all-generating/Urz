@@ -1,0 +1,15 @@
+{
+  "title": "Urz",
+  "yourPassword": "Your Password",
+  "passwordPlaceholder": "Enter your master password",
+  "salt": "Salt",
+  "saltPlaceholder": "Enter salt value",
+  "length": "Length",
+  "symbols": "Special Symbols",
+  "result": "Generated password will appear here",
+  "copyToClipboard": "Copy to Clipboard",
+  "copied": "Copied!",
+  "showPassword": "Show password",
+  "hidePassword": "Hide password",
+  "selectLanguage": "Language"
+}

@@ -1,4 +1,10 @@
 ```
+# Build artifacts
+frontend/dist/
+src-tauri/target/
+
+package-lock.json
+
 # Dependencies
 node_modules/
 vendor/
@@ -31,7 +37,7 @@ src-tauri/target/
 *.swp
 *.swo
 
-# OS
+# OS generated files
 .DS_Store
 Thumbs.db
 
@@ -56,4 +62,16 @@ htmlcov/
 # Temporary files
 *.tmp
 *.temp
+
+ Rust specific
+Cargo.lock
+target/
+**/*.rs.bk
+
+# Tauri
+src-tauri/tauri.conf.json
+src-tauri/tauri.conf.dev.json
+
+# Testing
+.vitest/
 ```
