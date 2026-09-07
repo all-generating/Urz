@@ -77,7 +77,7 @@ jobs:
 
       - name: Install frontend dependencies
         working-directory: frontend
-        run: npm ci
+        run: npm install
 
       - name: Build Tauri
         uses: tauri-apps/tauri-action@v0
@@ -106,7 +106,7 @@ jobs:
 
       - name: Install frontend dependencies
         working-directory: frontend
-        run: npm ci
+        run: npm install
 
       - name: Build Tauri
         uses: tauri-apps/tauri-action@v0
@@ -135,7 +135,7 @@ jobs:
 
       - name: Install frontend dependencies
         working-directory: frontend
-        run: npm ci
+        run: npm install
 
       - name: Build Tauri
         uses: tauri-apps/tauri-action@v0
@@ -165,7 +165,7 @@ jobs:
 
       - name: Install frontend dependencies
         working-directory: frontend
-        run: npm ci
+        run: npm install
 
       - name: Build Tauri
         uses: tauri-apps/tauri-action@v0
@@ -224,7 +224,7 @@ jobs:
 
       - name: Install frontend dependencies
         working-directory: frontend
-        run: npm ci
+        run: npm install
 
       - name: Build Android APK
         uses: tauri-apps/tauri-action@v0
