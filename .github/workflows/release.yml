@@ -210,6 +210,8 @@ jobs:
 
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-linux-android
 
       - name: Setup Java for Android
         uses: actions/setup-java@v4
