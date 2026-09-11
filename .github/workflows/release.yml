@@ -87,7 +87,7 @@ jobs:
           releaseId: ${{ needs.create-release.outputs.release_id }}
           appVersion: ${{ github.ref_name }}
           projectPath: src-tauri
-          tauriScript: npx @tauri-apps/cli@1
+          tauriScript: npx @tauri-apps/cli@2
 
   build-windows:
     needs: create-release
@@ -117,7 +117,7 @@ jobs:
           releaseId: ${{ needs.create-release.outputs.release_id }}
           appVersion: ${{ github.ref_name }}
           projectPath: src-tauri
-          tauriScript: npx @tauri-apps/cli@1
+          tauriScript: npx @tauri-apps/cli@2
 
   build-macos-intel:
     needs: create-release
@@ -148,7 +148,7 @@ jobs:
           appVersion: ${{ github.ref_name }}
           projectPath: src-tauri
           args: --target x86_64-apple-darwin
-          tauriScript: npx @tauri-apps/cli@1
+          tauriScript: npx @tauri-apps/cli@2
 
   build-macos-arm:
     needs: create-release
@@ -179,7 +179,7 @@ jobs:
           appVersion: ${{ github.ref_name }}
           projectPath: src-tauri
           args: --target aarch64-apple-darwin
-          tauriScript: npx @tauri-apps/cli@1
+          tauriScript: npx @tauri-apps/cli@2
 
   build-android:
     needs: create-release
