@@ -222,10 +222,7 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v4
         with:
-          api-level: 34
-          build-tools-version: 34.0.0
-          ndk-version: r26
-          cmake-version: 3.22.1
+          packages: platforms;android-34 build-tools;34.0.0 ndk;26.1.10953453 cmake;3.22.1
 
       - name: Setup Android NDK
         uses: nttld/setup-ndk@v1
