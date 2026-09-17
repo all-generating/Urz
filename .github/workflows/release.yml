@@ -275,5 +275,5 @@ jobs:
           releaseId: ${{ needs.create-release.outputs.release_id }}
           appVersion: ${{ github.ref_name }}
           projectPath: src-tauri
-          args: --target aarch64-linux-android -- --no-bundle
+          args: --target aarch64-linux-android --no-bundle
           tauriScript: npx @tauri-apps/cli@2
