@@ -206,7 +206,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
@@ -221,6 +221,11 @@ jobs:
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          api-level: 34
+          build-tools-version: 34.0.0
+          ndk-version: r26
+          cmake-version: 3.22.1
 
       - name: Setup Android NDK
         uses: nttld/setup-ndk@v1
