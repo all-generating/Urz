@@ -1,4 +1,4 @@
-# Urz - Minimalistic Password Generator
+# Urz - Deterministic Password Generator
 
 Urz is a minimalistic cross-platform application for dynamic generation of pseudorandom passwords.
 
