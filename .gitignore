@@ -72,6 +72,13 @@ target/
 src-tauri/tauri.conf.json
 src-tauri/tauri.conf.dev.json
 
+# Android build artifacts                                                                            
+src-tauri/gen/android/.gradle/                                                                       
+src-tauri/gen/android/app/build/                                                                     
+src-tauri/gen/android/build/                                                                         
+*.apk                                                                                                
+*.aab 
+
 # Testing
 .vitest/
 ```
