@@ -1,4 +1,5 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
+import { invoke } from '@tauri-apps/api/core';
 import en from './locales/en.json';
 import es from './locales/es.json';
 import ru from './locales/ru.json';
@@ -10,27 +11,6 @@ type Lang = 'en' | 'es' | 'ru';
 function App() {
   const [lang, setLang] = useState<Lang>('en');
   const t = translations[lang];
-  
-  // Get invoke function - safely access Tauri API
-  const invoke = useCallback(async (cmd: string, args?: Record<string, unknown>) => {
-    if (window.__TAURI__?.core?.invoke) {
-      console.log(`[Tauri Invoke] Calling command: ${cmd}`, args);
-      try {
-        const result = await window.__TAURI__.core.invoke(cmd, args);
-        console.log(`[Tauri Invoke] Result for ${cmd}:`, result);
-        return result;
-      } catch (error) {
-        console.error(`[Tauri Invoke] Error for ${cmd}:`, error);
-        throw error;
-      }
-    }
-    // Fallback for testing/browser environment
-    console.warn(`Tauri invoke not available, mocking command: ${cmd}`);
-    if (cmd === 'generate_password_cmd') {
-      return { password: 'MOCKED_PASSWORD' };
-    }
-    return undefined;
-  }, []);
   
   const [password, setPassword] = useState('');
   const [salt, setSalt] = useState('');
@@ -52,25 +32,29 @@ function App() {
       }
       
       try {
-        const res = await invoke('generate_password_cmd', {
+        const res = await invoke<any>('generate_password_cmd', {
           password,
           salt,
           length,
           useSymbols: useSymbols,
         });
-        setResult((res as any)?.password || '');
+        setResult(res?.password || '');
       } catch (e) {
-        console.error(e);
+        console.error('Tauri invoke error:', e);
         setResult('');
       }
     };
     generate();
-  }, [password, salt, length, useSymbols, invoke]);
+  }, [password, salt, length, useSymbols]);
   
   const handleCopy = async () => {
-    await invoke('copy_to_clipboard', { text: result });
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    try {
+      await invoke('copy_to_clipboard', { text: result });
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (e) {
+      console.error('Copy failed:', e);
+    }
   };
 
   return (
