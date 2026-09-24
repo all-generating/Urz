@@ -263,5 +263,4 @@ jobs:
           releaseId: ${{ needs.create-release.outputs.release_id }}
           appVersion: ${{ github.ref_name }}
           projectPath: src-tauri
-          args: android build
-          tauriScript: npx @tauri-apps/cli@2
+          tauriScript: npx @tauri-apps/cli@2 android
