@@ -1,5 +1,8 @@
 {
   "name": "urz-tauri-android-bridge",
   "version": "1.0.0",
-  "private": true
+  "private": true,
+  "scripts": {
+    "tauri": "echo 'Tauri bridge' "
+  }
 }
