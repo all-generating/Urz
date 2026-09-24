@@ -256,12 +256,14 @@ jobs:
         run: npm run build
 
       - name: Build Android APK
-        uses: tauri-apps/tauri-action@v0
+        run: npx @tauri-apps/cli@2 android build --apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Android APK
+        uses: softprops/action-gh-release@v2
         with:
-          releaseId: ${{ needs.create-release.outputs.release_id }}
-          appVersion: ${{ github.ref_name }}
-          projectPath: src-tauri
-          args: android build
-          tauriScript: npx @tauri-apps/cli@2
+          files: src-tauri/gen/android/app/build/outputs/apk/release/*.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
