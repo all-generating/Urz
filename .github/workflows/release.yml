@@ -255,17 +255,36 @@ jobs:
         working-directory: frontend
         run: npm run build
 
+      - name: Decode Android Keystore
+        run: |
+          echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 -d > release.jks
+
       - name: Build Android APK
-        run: npx @tauri-apps/cli@2 android build --apk
+        run: |
+          npx @tauri-apps/cli@2 android build --apk \
+            --android-keystore release.jks \
+            --android-keystore-password ${{ secrets.ANDROID_KEYSTORE_PASSWORD }} \
+            --android-key-alias ${{ secrets.ANDROID_KEY_ALIAS }} \
+            --android-key-password ${{ secrets.ANDROID_KEY_PASSWORD }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Find Android APK
+      - name: Find and Rename Android APK
         id: find_apk
         run: |
           APK_PATH=$(find src-tauri -name "*.apk" | grep "release" | head -n 1)
-          echo "apk_path=$APK_PATH" >> $GITHUB_OUTPUT
-          echo "Found APK at: $APK_PATH"
+          if [ -z "$APK_PATH" ]; then
+            echo "APK not found"
+            exit 1
+          fi
+          
+          VERSION=${{ github.ref_name }}
+          if [[ "$VERSION" == "main" ]]; then VERSION="latest"; fi
+          
+          NEW_NAME="Urz-$VERSION-android.apk"
+          cp "$APK_PATH" "$NEW_NAME"
+          echo "apk_path=$NEW_NAME" >> $GITHUB_OUTPUT
+          echo "Found and renamed APK to: $NEW_NAME"
 
       - name: Upload Android APK
         uses: softprops/action-gh-release@v2
