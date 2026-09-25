@@ -260,37 +260,30 @@ jobs:
           echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 -d > release.jks
 
       - name: Build Android APK
-        run: |
-          npx @tauri-apps/cli@2 android build --apk -- \
-            --android-keystore release.jks \
-            --android-keystore-password ${{ secrets.ANDROID_KEYSTORE_PASSWORD }} \
-            --android-key-alias ${{ secrets.ANDROID_KEY_ALIAS }} \
-            --android-key-password ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: npx @tauri-apps/cli@2 android build --apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Find and Rename Android APK
-        id: find_apk
+      - name: Sign Android APK
+        id: sign_apk
         run: |
-          APK_PATH=$(find src-tauri -name "*.apk" | grep "release" | head -n 1)
-          if [ -z "$APK_PATH" ]; then
-            echo "APK not found"
-            exit 1
-          fi
-          
+          UNSIGNED_APK=$(find src-tauri -name "*.apk" | grep "release" | head -n 1)
+          if [ -z "$UNSIGNED_APK" ]; then echo "APK not found"; exit 1; fi
           VERSION=${{ github.ref_name }}
           if [[ "$VERSION" == "main" ]]; then VERSION="latest"; fi
-          
-          NEW_NAME="Urz-$VERSION-android.apk"
-          cp "$APK_PATH" "$NEW_NAME"
-          echo "apk_path=$NEW_NAME" >> $GITHUB_OUTPUT
-          echo "Found and renamed APK to: $NEW_NAME"
+          SIGNED_APK="Urz-$VERSION-android-signed.apk"
+          APKSIGNER=$(find $ANDROID_HOME/build-tools -name apksigner | head -n 1)
+          if [ -z "$APKSIGNER" ]; then echo "apksigner not found"; exit 1; fi
+          $APKSIGNER sign --ks release.jks --ks-pass pass:${{ secrets.ANDROID_KEYSTORE_PASSWORD }} --out "$SIGNED_APK" "$UNSIGNED_APK"
+          echo "apk_path=$SIGNED_APK" >> $GITHUB_OUTPUT
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload Android APK
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.ref_name }}
-          files: ${{ steps.find_apk.outputs.apk_path }}
+          files: ${{ steps.sign_apk.outputs.apk_path }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
