@@ -261,7 +261,7 @@ jobs:
 
       - name: Build Android APK
         run: |
-          npx @tauri-apps/cli@2 android build --apk \
+          npx @tauri-apps/cli@2 android build --apk -- \
             --android-keystore release.jks \
             --android-keystore-password ${{ secrets.ANDROID_KEYSTORE_PASSWORD }} \
             --android-key-alias ${{ secrets.ANDROID_KEY_ALIAS }} \
