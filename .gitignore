@@ -1,21 +1,14 @@
-```
 # Build artifacts
 frontend/dist/
 src-tauri/target/
-
-package-lock.json
+target/
 
 # Dependencies
 node_modules/
-vendor/
 
-# Build outputs
-dist/
-build/
-target/
+# Package manager
 
-# Tauri specific
-src-tauri/target/
+# Tauri bundles
 **/*.app
 **/*.exe
 **/*.msi
@@ -23,13 +16,23 @@ src-tauri/target/
 **/*.rpm
 **/*.AppImage
 
+# Android build artifacts
+src-tauri/gen/android/.gradle/
+src-tauri/gen/android/app/build/
+src-tauri/gen/android/build/
+src-tauri/gen/android/app/.cxx/
+*.apk
+*.aab
+*.hprof
+local.properties
+
+# Generated Tauri ACL schemas (regenerated on every build)
+src-tauri/gen/schemas/
+
 # Development
 .env
-.env.local
 .env.*
-.env.test
-.env.development
-.env.production
+*.log
 
 # IDE
 .vscode/
@@ -41,44 +44,6 @@ src-tauri/target/
 .DS_Store
 Thumbs.db
 
-# Logs
-*.log
-
-# Python (if any Python files exist in project)
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-venv/
-.venv/
-.env
-
-# Coverage
-coverage/
-htmlcov/
-.coverage
-
-# Temporary files
-*.tmp
-*.temp
-
- Rust specific
-Cargo.lock
-target/
-**/*.rs.bk
-
-# Tauri
-src-tauri/tauri.conf.json
-src-tauri/tauri.conf.dev.json
-
-# Android build artifacts                                                                            
-src-tauri/gen/android/.gradle/                                                                       
-src-tauri/gen/android/app/build/                                                                     
-src-tauri/gen/android/build/                                                                         
-*.apk                                                                                                
-*.aab 
-
 # Testing
 .vitest/
-```
+coverage/

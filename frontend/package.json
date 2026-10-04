@@ -1,6 +1,6 @@
 {
   "name": "urz-frontend",
-  "version": "1.1.0",
+  "version": "1.1.4",
   "description": "Urz password generator frontend",
   "type": "module",
   "scripts": {
