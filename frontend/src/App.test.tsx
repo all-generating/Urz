@@ -6,6 +6,10 @@ import App from './App';
 // Mock Tauri invoke function
 const mockInvoke = vi.fn();
 
+vi.mock('@tauri-apps/api/core', () => ({
+  invoke: (...args: unknown[]) => mockInvoke(...args),
+}));
+
 describe('Password Generator App', () => {
   beforeEach(() => {
     vi.clearAllMocks();

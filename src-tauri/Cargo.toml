@@ -1,6 +1,6 @@
 [package]
 name = "urz"
-version = "1.1.0"
+version = "1.1.4"
 edition = "2021"
 description = "Minimalistic password generator"
 license = "MIT"
