@@ -15,7 +15,7 @@ function App() {
   const [password, setPassword] = useState('');
   const [salt, setSalt] = useState('');
   const [length, setLength] = useState(16);
-  const [useSymbols, setUseSymbols] = useState(false);
+  const [useSymbols, setUseSymbols] = useState(true);
   const [result, setResult] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showInputPassword, setShowInputPassword] = useState(false);

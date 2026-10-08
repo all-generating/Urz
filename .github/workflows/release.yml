@@ -136,6 +136,7 @@ jobs:
           releaseId: ${{ needs.create-release.outputs.release_id }}
           appVersion: ${{ github.ref_name }}
           projectPath: src-tauri
+          args: build --no-bundle
           tauriScript: npx @tauri-apps/cli@2
 
   build-macos-intel:
