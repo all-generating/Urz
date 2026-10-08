@@ -138,6 +138,7 @@ jobs:
           projectPath: src-tauri
           args: --no-bundle
           tauriScript: npx @tauri-apps/cli@2
+          uploadPlainBinary: true
 
   build-macos-intel:
     needs: create-release
